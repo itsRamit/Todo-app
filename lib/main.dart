@@ -50,7 +50,7 @@ class _HomeState extends State<Home> {
           });
         },
         height: 60,
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.black, //image.assets("Path")
         color: Color(0xff616B7B),
         buttonBackgroundColor: Colors.green,
         animationDuration: Duration(milliseconds: 300),
@@ -61,7 +61,9 @@ class _HomeState extends State<Home> {
           Icon(Icons.settings),
         ],
       ),
-      body: screens[currentidx],
+      body:screens[currentidx],
     );
   }
 }
+
+

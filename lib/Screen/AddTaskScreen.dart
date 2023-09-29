@@ -1,8 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:todo_app/Screen/TaskScreen.dart';
 import 'package:todo_app/const/const.dart';
+import 'package:todo_app/main.dart';
 import 'package:todo_app/widgets/button.dart';
 
 class Addtask extends StatefulWidget {
@@ -160,7 +161,8 @@ class _AddtaskState extends State<Addtask> {
                       "time":
                           "${DateTime.now().hour}:${DateTime.now().minute} ${DateTime.now().hour <= 12 ? "AM" : "PM"}"
                     });
-                    Navigator.pop(context);
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (context) => Home()));
                   },
                   title: "Add Task",
                   loading: false)

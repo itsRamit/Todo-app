@@ -28,11 +28,12 @@ class _taskscreenState extends State<taskscreen> {
       backgroundColor: Color(0xff030404),
       appBar: AppBar(
         backgroundColor: Color(0xff616B7B),
+        centerTitle: true,
         title: Title(
             color: Colors.green,
             child: Text(
               "Tasks",
-              style: GoogleFonts.robotoCondensed(color: Colors.black),
+              style: GoogleFonts.robotoCondensed(color: Colors.white),
             )),
       ),
       body: StreamBuilder(

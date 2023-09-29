@@ -47,17 +47,9 @@ class _TaskCardState extends State<TaskCard> {
               Row(
                 children: [
                   Container(
-                    margin: EdgeInsets.all(h / 72),
-                    width: h / 12,
-                    height: h / 12,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: const Icon(
-                      Icons.lock_clock_rounded,
-                      size: 35,
-                    ),
+                    margin: EdgeInsets.all(h / 144),
+                    width: w / 8,
+                    child: Image.asset(path[widget.idx]),
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

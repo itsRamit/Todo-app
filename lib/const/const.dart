@@ -26,7 +26,15 @@ final List<String> category = [
   "Food",
   "Workout",
   "Work",
-  "Design",
+  "Timer",
   "Study",
   "None"
+];
+final List<String> path = [
+  "assets/images/food.png",
+  "assets/images/workout.png",
+  "assets/images/work.png",
+  "assets/images/clock.png",
+  "assets/images/study.png",
+  "assets/images/none.png",
 ];
