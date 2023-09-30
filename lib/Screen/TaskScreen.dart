@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:todo_app/Screen/ViewTaskScreen.dart';
 import 'package:todo_app/widgets/TaskCard.dart';
+import 'package:todo_app/widgets/button.dart';
 
 class taskscreen extends StatefulWidget {
   const taskscreen({super.key});
@@ -47,7 +47,7 @@ class _taskscreenState extends State<taskscreen> {
               itemBuilder: (context, index) {
                 Map<String, dynamic> document =
                     snapshot.data!.docs[index].data() as Map<String, dynamic>;
-                return InkWell(
+                return GestureDetector(
                   onTap: () {
                     Navigator.push(
                         context,
@@ -55,6 +55,29 @@ class _taskscreenState extends State<taskscreen> {
                             builder: (context) => ViewTaskScreen(
                                 Document: document,
                                 id: snapshot.data!.docs[index].id)));
+                  },
+                  onLongPress: () {
+                    showModalBottomSheet(
+                        backgroundColor: Color(0xff616B7B),
+                        context: context,
+                        builder: (BuildContext context) {
+                          return SizedBox(
+                            height: h / 6,
+                            child: Center(
+                              child: Button(
+                                  onPressed: () {
+                                    FirebaseFirestore.instance
+                                        .collection("Tasks")
+                                        .doc(snapshot.data!.docs[index].id)
+                                        .delete();
+                                    Navigator.pop(context);
+                                  },
+                                  color: Colors.green,
+                                  title: "Delete",
+                                  loading: false),
+                            ),
+                          );
+                        });
                   },
                   child: TaskCard(
                     title: document["title"],
@@ -71,11 +94,4 @@ class _taskscreenState extends State<taskscreen> {
       ),
     );
   }
-}
-
-Widget label(String text, double size, FontWeight fontWeight) {
-  return Text(text,
-      style: GoogleFonts.robotoCondensed(
-          textStyle: TextStyle(
-              fontSize: size, color: Colors.white, fontWeight: fontWeight)));
 }

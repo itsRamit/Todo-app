@@ -174,6 +174,7 @@ class _ViewTaskScreenState extends State<ViewTaskScreen> {
                     });
                     Navigator.pop(context);
                   },
+                  color:Colors.blue,
                   title: "Update Task",
                   loading: false)
             ],

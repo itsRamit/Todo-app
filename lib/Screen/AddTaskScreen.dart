@@ -164,6 +164,7 @@ class _AddtaskState extends State<Addtask> {
                     Navigator.pushReplacement(context,
                         MaterialPageRoute(builder: (context) => Home()));
                   },
+                  color:Colors.blue,
                   title: "Add Task",
                   loading: false)
             ],

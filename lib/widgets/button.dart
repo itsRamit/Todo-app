@@ -3,12 +3,15 @@ import 'package:flutter/material.dart';
 class Button extends StatelessWidget {
   VoidCallback onPressed;
   bool loading;
+  Color color;
   String title;
-  Button(
-      {super.key,
-      required this.onPressed,
-      required this.title,
-      required this.loading});
+  Button({
+    super.key,
+    required this.onPressed,
+    required this.title,
+    required this.loading,
+    required this.color,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +21,7 @@ class Button extends StatelessWidget {
       child: ElevatedButton(
           onPressed: onPressed,
           style: ElevatedButton.styleFrom(
-            backgroundColor: Color(0xff2664FA),
+            backgroundColor: color,
           ),
           child: !loading
               ? Text(

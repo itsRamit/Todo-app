@@ -55,6 +55,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           // });
                         },
                         title: "Get Started",
+                        color:Colors.green,
                         loading: false),
                 ],
               )),
