@@ -1,13 +1,10 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:todo_app/Screen/AddTaskScreen.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:todo_app/Screen/ProfileScreen.dart';
-import 'package:todo_app/Screen/TaskScreen.dart';
+import 'package:todo_app/const/const.dart';
+import 'package:todo_app/screen/ProfileScreen.dart';
+import 'package:todo_app/screen/TaskScreen.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -18,7 +15,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -37,7 +33,7 @@ class Home extends StatefulWidget {
   State<Home> createState() => _HomeState();
 }
 
-List<Widget> screens = [taskscreen(), Addtask(), ProfileScreen()];
+List<Widget> screens = [TaskScreen(), ProfileScreen(), ProfileScreen()];
 
 class _HomeState extends State<Home> {
   int currentidx = 0;
@@ -51,9 +47,9 @@ class _HomeState extends State<Home> {
           });
         },
         height: 60,
-        backgroundColor: Colors.black, //image.assets("Path")
-        color: Color(0xff616B7B),
-        buttonBackgroundColor: Colors.green,
+        backgroundColor: bg_color, //image.assets("Path")
+        color: secondary_color,
+        buttonBackgroundColor: primary_color,
         animationDuration: Duration(milliseconds: 300),
         animationCurve: Curves.decelerate,
         items: const [
@@ -62,9 +58,7 @@ class _HomeState extends State<Home> {
           Icon(Icons.settings),
         ],
       ),
-      body:screens[currentidx],
+      body: screens[currentidx],
     );
   }
 }
-
-

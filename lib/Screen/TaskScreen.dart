@@ -1,96 +1,131 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:todo_app/Screen/ViewTaskScreen.dart';
-import 'package:todo_app/widgets/TaskCard.dart';
-import 'package:todo_app/widgets/button.dart';
+import 'package:flutter/widgets.dart';
+import 'package:horizontal_week_calendar/horizontal_week_calendar.dart';
+import 'package:todo_app/const/const.dart';
+import 'package:todo_app/widgets/label.dart';
 
-class taskscreen extends StatefulWidget {
-  const taskscreen({super.key});
+class TaskScreen extends StatefulWidget {
+  TaskScreen({super.key});
 
   @override
-  State<taskscreen> createState() => _taskscreenState();
+  State<TaskScreen> createState() => _TaskScreenState();
 }
 
-class _taskscreenState extends State<taskscreen> {
-  late Stream<QuerySnapshot> _stream;
-
+class _TaskScreenState extends State<TaskScreen> {
   @override
-  void initState() {
-    super.initState();
-    _stream = FirebaseFirestore.instance.collection("Tasks").snapshots();
-  }
-
   Widget build(BuildContext context) {
     var w = MediaQuery.of(context).size.width;
     var h = MediaQuery.of(context).size.height;
     return Scaffold(
-      backgroundColor: Color(0xff030404),
-      appBar: AppBar(
-        backgroundColor: Color(0xff616B7B),
-        centerTitle: true,
-        title: Title(
-            color: Colors.green,
-            child: Text(
-              "Tasks",
-              style: GoogleFonts.robotoCondensed(color: Colors.white),
-            )),
-      ),
-      body: StreamBuilder(
-        stream: _stream,
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return Center(child: CircularProgressIndicator());
-          }
-          return ListView.builder(
-              itemCount: snapshot.data!.docs.length,
-              itemBuilder: (context, index) {
-                Map<String, dynamic> document =
-                    snapshot.data!.docs[index].data() as Map<String, dynamic>;
-                return GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ViewTaskScreen(
-                                Document: document,
-                                id: snapshot.data!.docs[index].id)));
-                  },
-                  onLongPress: () {
-                    showModalBottomSheet(
-                        backgroundColor: Color(0xff616B7B),
-                        context: context,
-                        builder: (BuildContext context) {
-                          return SizedBox(
-                            height: h / 6,
-                            child: Center(
-                              child: Button(
-                                  onPressed: () {
-                                    FirebaseFirestore.instance
-                                        .collection("Tasks")
-                                        .doc(snapshot.data!.docs[index].id)
-                                        .delete();
-                                    Navigator.pop(context);
-                                  },
-                                  color: Colors.green,
-                                  title: "Delete",
-                                  loading: false),
-                            ),
-                          );
-                        });
-                  },
-                  child: TaskCard(
-                    title: document["title"],
-                    discription: document["description"],
-                    idx: document["category"],
-                    imp: document["important"],
-                    time: document["time"],
-                    check: document["check"],
-                    id: snapshot.data!.docs[index].id,
+      backgroundColor: bg_color,
+      // appBar: AppBar(),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.only(left: 16.0, right: 16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              label(fontWeight: FontWeight.bold, text: "Calender", size: 22),
+              Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: secondary_color),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: HorizontalWeekCalendar(
+                    initialDate: DateTime.now(),
+                    minDate: DateTime(2024, 3),
+                    maxDate: DateTime(2024, 12),
+                    borderRadius: BorderRadius.circular(12),
+                    inactiveBackgroundColor: secondary_color,
+                    activeBackgroundColor: primary_color,
+                    activeTextColor: text_color,
+                    inactiveTextColor: text_color,
+                    activeNavigatorColor: text_color,
+                    inactiveNavigatorColor: text_color,
+                    monthColor: text_color,
+                    scrollPhysics: BouncingScrollPhysics(),
+                    onDateChange: (date) {
+                      setState(() {
+                        // selectedDate = date;
+                      });
+                    },
                   ),
-                );
-              });
-        },
+                ),
+              ),
+              label(
+                  fontWeight: FontWeight.bold,
+                  text: "Tasks in progress",
+                  size: 22),
+              Container(
+                width: w,
+                decoration: BoxDecoration(
+                    color: secondary_color,
+                    borderRadius: BorderRadius.circular(20)),
+                child: Row(
+                  children: [
+                    Flexible(
+                      flex: 1,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          height: h / 9,
+                          decoration: BoxDecoration(
+                              color: bg_color,
+                              borderRadius: BorderRadius.circular(20)),
+                          child: Image.asset(
+                            'assets/images/none.png',
+                            fit: BoxFit.fitWidth,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Flexible(
+                      flex: 3,
+                      child: Container(
+                        // height: h / 9,
+                        margin: EdgeInsets.only(right: 8),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "headline of task headline of task",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 18),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            Text(
+                              "headline of task headline of task headline of task headline of taskheadline of task headline of taskheadline of task headline of task",
+                              style:
+                                  TextStyle(fontSize: 14, color: Colors.grey),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            Container(
+                                decoration: BoxDecoration(
+                                  color: primary_color.withOpacity(0.5),
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 6.0, bottom: 6, left: 16, right: 16),
+                                  child: Text(
+                                    "Workout",
+                                    // style:
+                                    //     TextStyle(fontWeight: FontWeight.bold),
+                                  ),
+                                )),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
       ),
     );
   }

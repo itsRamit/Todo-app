@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 
+const primary_color = Color(0xFF68E5A1);
+const bg_color = Color(0xFFF5F5F5);
+const secondary_color = Color(0xFFFEFEFE);
+const text_color = Color.fromARGB(255, 51, 67, 75);
+
 LinearGradient gradient(Color _color) {
   return LinearGradient(
       begin: Alignment.centerLeft,
