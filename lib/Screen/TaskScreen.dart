@@ -84,7 +84,7 @@ class _TaskScreenState extends State<TaskScreen> {
                       flex: 3,
                       child: Container(
                         // height: h / 9,
-                        margin: EdgeInsets.only(right: 8),
+                        margin: EdgeInsets.only(right: 8, top: 8),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -103,6 +103,7 @@ class _TaskScreenState extends State<TaskScreen> {
                               overflow: TextOverflow.ellipsis,
                             ),
                             Container(
+                                margin: EdgeInsets.only(top: 8, bottom: 8),
                                 decoration: BoxDecoration(
                                   color: primary_color.withOpacity(0.5),
                                   borderRadius: BorderRadius.circular(20),

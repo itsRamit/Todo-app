@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:todo_app/const/const.dart';
 import 'package:todo_app/screen/ProfileScreen.dart';
 import 'package:todo_app/screen/TaskScreen.dart';
+import 'package:todo_app/screen/ViewTaskScreen.dart';
 
 void main() async {
   runApp(const MyApp());
@@ -33,7 +34,7 @@ class Home extends StatefulWidget {
   State<Home> createState() => _HomeState();
 }
 
-List<Widget> screens = [TaskScreen(), ProfileScreen(), ProfileScreen()];
+List<Widget> screens = [TaskScreen(), ViewTaskScreen(), ProfileScreen()];
 
 class _HomeState extends State<Home> {
   int currentidx = 0;
