@@ -1,7 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:horizontal_week_calendar/horizontal_week_calendar.dart';
 import 'package:todo_app/const/const.dart';
+import 'package:todo_app/screen/ViewTaskScreen.dart';
 import 'package:todo_app/widgets/label.dart';
 
 class TaskScreen extends StatefulWidget {
@@ -57,75 +59,94 @@ class _TaskScreenState extends State<TaskScreen> {
                   fontWeight: FontWeight.bold,
                   text: "Tasks in progress",
                   size: 22),
-              Container(
-                width: w,
-                decoration: BoxDecoration(
-                    color: secondary_color,
-                    borderRadius: BorderRadius.circular(20)),
-                child: Row(
-                  children: [
-                    Flexible(
-                      flex: 1,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          height: h / 9,
-                          decoration: BoxDecoration(
-                              color: bg_color,
-                              borderRadius: BorderRadius.circular(20)),
-                          child: Image.asset(
-                            'assets/images/none.png',
-                            fit: BoxFit.fitWidth,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Flexible(
-                      flex: 3,
-                      child: Container(
-                        // height: h / 9,
-                        margin: EdgeInsets.only(right: 8, top: 8),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "headline of task headline of task",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 18),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                            Text(
-                              "headline of task headline of task headline of task headline of taskheadline of task headline of taskheadline of task headline of task",
-                              style:
-                                  TextStyle(fontSize: 14, color: Colors.grey),
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                            Container(
-                                margin: EdgeInsets.only(top: 8, bottom: 8),
-                                decoration: BoxDecoration(
-                                  color: primary_color.withOpacity(0.5),
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      top: 6.0, bottom: 6, left: 16, right: 16),
-                                  child: Text(
-                                    "Workout",
-                                    // style:
-                                    //     TextStyle(fontWeight: FontWeight.bold),
-                                  ),
-                                )),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              )
+              TaskCard(),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class TaskCard extends StatefulWidget {
+  const TaskCard({super.key});
+
+  @override
+  State<TaskCard> createState() => _TaskCardState();
+}
+
+class _TaskCardState extends State<TaskCard> {
+  @override
+  Widget build(BuildContext context) {
+    var w = MediaQuery.of(context).size.width;
+    var h = MediaQuery.of(context).size.height;
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => ViewTaskScreen()));
+      },
+      child: Container(
+        width: w,
+        decoration: BoxDecoration(
+            color: secondary_color, borderRadius: BorderRadius.circular(20)),
+        child: Row(
+          children: [
+            Flexible(
+              flex: 1,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  height: h / 9,
+                  decoration: BoxDecoration(
+                      color: bg_color, borderRadius: BorderRadius.circular(20)),
+                  child: Image.asset(
+                    'assets/images/none.png',
+                    fit: BoxFit.fitWidth,
+                  ),
+                ),
+              ),
+            ),
+            Flexible(
+              flex: 3,
+              child: Container(
+                // height: h / 9,
+                margin: EdgeInsets.only(right: 8, top: 8),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "headline of task headline of task",
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    Text(
+                      "headline of task headline of task headline of task headline of taskheadline of task headline of taskheadline of task headline of task",
+                      style: TextStyle(fontSize: 14, color: Colors.grey),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    Container(
+                        margin: EdgeInsets.only(top: 8, bottom: 8),
+                        decoration: BoxDecoration(
+                          color: primary_color.withOpacity(0.5),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              top: 6.0, bottom: 6, left: 16, right: 16),
+                          child: Text(
+                            "Workout",
+                            // style:
+                            //     TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                        )),
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

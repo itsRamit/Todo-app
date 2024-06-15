@@ -1,6 +1,7 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:todo_app/const/const.dart';
+import 'package:todo_app/screen/AddTaskScreen.dart';
 import 'package:todo_app/screen/ProfileScreen.dart';
 import 'package:todo_app/screen/TaskScreen.dart';
 import 'package:todo_app/screen/ViewTaskScreen.dart';
@@ -34,7 +35,7 @@ class Home extends StatefulWidget {
   State<Home> createState() => _HomeState();
 }
 
-List<Widget> screens = [TaskScreen(), ViewTaskScreen(), ProfileScreen()];
+List<Widget> screens = [TaskScreen(), AddTaskScreen(), ProfileScreen()];
 
 class _HomeState extends State<Home> {
   int currentidx = 0;

@@ -119,6 +119,7 @@ class _ViewTaskScreenState extends State<ViewTaskScreen> {
                         decoration: BoxDecoration(
                           color: primary_color.withOpacity(0.5),
                           borderRadius: BorderRadius.circular(20),
+                          
                           boxShadow: [
                             // BoxShadow(
                             //   color: Colors.black.withOpacity(
@@ -191,7 +192,9 @@ class _ViewTaskScreenState extends State<ViewTaskScreen> {
                     backgroundColor:
                         MaterialStateProperty.all<Color>(secondary_color),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
                   icon: const Icon(
                     Icons.arrow_back,
                     color: primary_color,
