@@ -41,6 +41,7 @@ dependencies:
   curved_navigation_bar: ^1.0.3
   horizontal_week_calendar: ^0.0.17
   flutter_emoji_feedback: ^0.3.0
+  fl_chart: ^0.68.0
 
 dev_dependencies:
   flutter_test:
