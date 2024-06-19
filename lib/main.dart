@@ -2,7 +2,9 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:todo_app/const/const.dart';
 import 'package:todo_app/screen/AddTaskScreen.dart';
+import 'package:todo_app/screen/OnboardingScreen.dart';
 import 'package:todo_app/screen/ProfileScreen.dart';
+import 'package:todo_app/screen/SplashScreen.dart';
 import 'package:todo_app/screen/TaskScreen.dart';
 import 'package:todo_app/screen/ViewTaskScreen.dart';
 
@@ -23,7 +25,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.grey),
         useMaterial3: true,
       ),
-      home: const Home(),
+      home: SplashScreen(),
     );
   }
 }

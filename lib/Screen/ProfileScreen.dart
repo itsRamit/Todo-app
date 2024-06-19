@@ -1,6 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:todo_app/const/const.dart';
 import 'package:todo_app/widgets/label.dart';
 
@@ -48,15 +49,15 @@ class ProfileScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       CircleAvatar(
-                        radius: 50,
+                        radius: w / 7,
                         backgroundImage:
                             NetworkImage('https://via.placeholder.com/150'),
                       ),
                       SizedBox(height: 10),
-                      Text(
-                        'John Doe',
-                        style: TextStyle(
-                            fontSize: 22, fontWeight: FontWeight.bold),
+                      label(
+                        text: "John Doe",
+                        size: 22,
+                        fontWeight: FontWeight.bold,
                       ),
                       SizedBox(height: 5),
                       Text(
@@ -101,6 +102,7 @@ class ProfileScreen extends StatelessWidget {
                     ],
                   ),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       label(
                         text: "Task completion graph",
@@ -125,20 +127,17 @@ class MyTasksSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.only(left: 16.0, right: 16, bottom: 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Text(
-                'My Tasks',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-              Text(
-                'More',
-                style: TextStyle(fontSize: 14, color: Colors.blue),
+              label(
+                text: "My Task",
+                size: 18,
+                fontWeight: FontWeight.bold,
               ),
             ],
           ),
@@ -166,10 +165,11 @@ class TaskStatusCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var w = MediaQuery.of(context).size.width;
     return Column(
       children: <Widget>[
         CircleAvatar(
-          radius: 30,
+          radius: w / 12,
           backgroundColor: color.withOpacity(0.2),
           child: Text(
             count.toString(),
@@ -190,42 +190,43 @@ class TaskStatusCard extends StatelessWidget {
 class TaskCompletionGraph extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var w = MediaQuery.of(context).size.width;
     return SizedBox(
-      height: 200,
+      height: w / 2,
       child: Stack(
         children: <Widget>[
           PieChart(
             PieChartData(
               sections: [
                 PieChartSectionData(
-                  color: Colors.green,
+                  color: primary_color,
                   value: 125,
                   title: 'Completed',
-                  radius: 60,
+                  radius: w / 7,
                   titleStyle: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white),
+                      color: Colors.black),
                 ),
                 PieChartSectionData(
                   color: Colors.orange,
                   value: 3,
                   title: 'In-Process',
-                  radius: 60,
+                  radius: w / 7,
                   titleStyle: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white),
+                      color: Colors.black),
                 ),
                 PieChartSectionData(
                   color: Colors.grey[300]!,
                   value: 11,
                   title: 'Pending',
-                  radius: 60,
+                  radius: w / 7,
                   titleStyle: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white),
+                      color: Colors.black),
                 ),
               ],
               sectionsSpace: 2,
