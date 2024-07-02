@@ -1,8 +1,35 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:jumping_dot/jumping_dot.dart';
 import 'package:todo_app/const/const.dart';
+import 'package:todo_app/service/UserService.dart';
+import 'package:todo_app/widgets/Loader.dart';
+import 'package:todo_app/widgets/utils.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  var emailController = TextEditingController();
+  var passController = TextEditingController();
+  bool loading = false;
+  void check(String email, String pass) async {
+    setState(() {
+      loading = true;
+    });
+    var response = await UserService().userlogin(email, pass);
+    if (response.statusCode == 200) {
+      Utils().toastmessage("Success");
+    } else {
+      Utils().toastmessage("Invalid username or password");
+    }
+    setState(() {
+      loading = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     var w = MediaQuery.of(context).size.width;
@@ -26,7 +53,7 @@ class LoginScreen extends StatelessWidget {
                   ),
                 ), // replace with your image asset
                 SizedBox(height: 30),
-                Text(
+                const Text(
                   'Log in',
                   style: TextStyle(
                     fontSize: 28,
@@ -38,11 +65,12 @@ class LoginScreen extends StatelessWidget {
                 CupertinoTextField(
                   prefix: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Icon(CupertinoIcons.phone,
+                    child: Icon(CupertinoIcons.mail,
                         color: CupertinoColors.systemGrey),
                   ),
-                  placeholder: 'Enter your phone number',
-                  keyboardType: TextInputType.phone,
+                  controller: emailController,
+                  placeholder: 'Enter your email',
+                  keyboardType: TextInputType.emailAddress,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(8.0),
@@ -59,6 +87,7 @@ class LoginScreen extends StatelessWidget {
                     child: Icon(CupertinoIcons.lock,
                         color: CupertinoColors.systemGrey),
                   ),
+                  controller: passController,
                   placeholder: 'Enter your password',
                   obscureText: true,
                   decoration: BoxDecoration(
@@ -78,7 +107,7 @@ class LoginScreen extends StatelessWidget {
                     onPressed: () {
                       // Handle forgot password
                     },
-                    child:const Text(
+                    child: const Text(
                       'Forgot Password?',
                       style: TextStyle(color: primary_color),
                     ),
@@ -86,14 +115,18 @@ class LoginScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 CupertinoButton(
-                  padding:const EdgeInsets.symmetric(horizontal: 140, vertical: 16),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 140, vertical: 16),
                   color: primary_color,
-                  
                   onPressed: () {
-                    // Handle login logic
+                    if (emailController.text.isEmpty ||
+                        passController.text.isEmpty) {
+                      Utils().toastmessage("Fill the required fields first!");
+                    } else {
+                      check(emailController.text, passController.text);
+                    }
                   },
-                  child: const Text('Log in'),
-                  
+                  child: loading ? Loader() : const Text('Log in'),
                 ),
                 const SizedBox(height: 20),
                 Row(

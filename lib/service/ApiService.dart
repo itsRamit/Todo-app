@@ -1,12 +1,12 @@
 import 'dart:convert';
 import 'dart:developer';
-
+import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todo_app/const/ApiConstant.dart';
 import 'package:todo_app/model/ApiResponse.dart';
 
-final http.Client _client = http.Client();
+final _client = http.Client();
 
 class ApiService {
   late ApiResponse _response;
@@ -15,7 +15,7 @@ class ApiService {
     Map<String, String> headers = {
       'Content-type': 'application/json',
       'Accept': 'application/json',
-      "Authorization": "Bearer $token"
+      // "Authorization": "Bearer $token"
     };
     try {
       Uri uri = Uri.https(ApiConstant.baseURL, "/$path", queryParams);
@@ -45,7 +45,7 @@ class ApiService {
     Map<String, String> headers = {
       'Content-type': 'application/json',
       'Accept': 'application/json',
-      "Authorization": "Bearer $token"
+      // "Authorization": "Bearer $token"
     };
     try {
       Uri uri = Uri.https(ApiConstant.baseURL, "/$path");
